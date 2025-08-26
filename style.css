@@ -1,0 +1,443 @@
+@font-face {
+    font-family: "National 2";
+    src: url("./National/National2-Regular.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "National 2";
+    src: url("./National/National2-Bold.otf") format("opentype");
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Ensure all text uses the custom font */
+body {
+    margin: 0;
+    font-family: "National 2", sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+}
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    transition: margin-left 0.3s ease;
+
+}
+
+#menu-toggle {
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+hr {
+    color: lightgray;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    padding: 20px;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+#second-sidebar {
+    position: absolute;
+    top: 0; /* Initially at the top */
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-height: 80vh; /* Prevents it from taking up the entire screen */
+    overflow-y: auto;
+    background-color: #EEEEEE;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-100%); /* Moves it out of view */
+    transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+    z-index: 1000;
+    padding: 10px;
+}
+
+/* When sidebar is open, slide it down */
+#second-sidebar.open {
+    top: 11%; /* Moves it down */
+    transform: translateY(0);
+}
+
+
+@media (max-width: 768px) {
+    #menu-toggle {
+        display: block; /* Show hamburger button on mobile */
+    }
+
+    .menu-header {
+        display: block; /* Hide the header on mobile */
+    }
+
+    .sidebar {
+        width: 200px;
+        display: none; /* Hide sidebar by default */
+        position: fixed;
+        top: 0;
+        left: -200px;
+        height: 100vh;
+        transition: left 0.3s ease; /* Add transition for sliding effect */
+    }
+
+    .sidebar.open {
+        left: 0; /* Sidebar will slide in */
+        display: block; /* Ensure sidebar is displayed when open */
+    }
+
+    .main-content {
+        margin-left: 0;
+        transition: margin-left 0.3s ease; /* Transition for main content when sidebar opens */
+    }
+
+    .main-content.sidebar-open {
+        margin-left: 200px; /* Shift content when sidebar is open */
+    }
+}
+
+.sidebar h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.sidebar li.active,
+.sidebar li:hover {
+    background-color: #990000;
+    color: #fff;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    height: 100vh; /* Ensure it takes the full height of the screen */
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 10px;
+    }
+}
+
+.main_header {
+    display: flex;
+    align-items: center;
+}
+
+.main_header h1 {
+    font-size: 24px;
+    margin-bottom: 23px;
+    margin-right: 15px
+}
+
+.main_header p {
+    color: gray;
+    font-weight: 100;
+}
+
+.highlights {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns by default */
+    gap: 20px;
+    justify-content: center; /* Ensures even spacing */
+    align-items: center;
+    width: 97.5%;
+    margin: 0 auto;
+    padding-bottom: 10px;
+}
+
+.highlights h3 {
+    font-size: clamp(14px, 2vw, 18px); /* Responsive font */
+    font-weight: 300;
+    text-align: center;
+}
+
+.card1, .card2 {
+    min-width: 50px;
+    height: 115px; /* Fixed height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers content */
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    font-size: clamp(12px, 2vw, 16px); 
+}
+
+.card1 {
+    background-color: #F0B4A9;
+}
+
+.card2 {
+    background-color: #F8C893;
+}
+
+.card1 .value, .card2 .value {
+    font-size: clamp(18px, 3vw, 24px); /* Responsive font for numbers */
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.card1 h3, .card2 h3 {
+    margin-top: 0px;
+}
+
+@media (max-width: 1100px) {
+    .highlights {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    }
+}
+
+/* Tablet view (2 per row) */
+@media (max-width: 768px) {
+    .highlights {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    }
+}
+
+/* Mobile view (1 per row) */
+@media (max-width: 480px) {
+    .highlights {
+        grid-template-columns: repeat(1, 1fr); /* 1 column */
+        width: 95%;
+    }
+}
+
+/* Flexbox layout for charts */
+.charts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center; /* Centers content and maintains spacing */
+    margin-bottom: 30px;
+}
+
+.chart-container {
+    position: relative;
+}
+
+/* Styling for the button */
+.info-btn {
+    position: absolute;
+    top: 35px;
+    right: 25px;
+    font-size: 18px;
+    background-color: #CBCCCC;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style for the popup */
+.popup {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 75px;
+    right: 30px;
+    width: 200px;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+/* Chart card styling */
+.chart-card {
+    position: relative;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1 1 48%; /* Default for 2 per row on large screens */
+    min-width: 45%; /* Ensures the chart card has a minimum width */
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    width: 90%;
+    padding-bottom: 20px;
+}
+
+#overtimeChart, #genderChart, #racialPieChart, #genderBarChart {
+    height: 300px;
+}
+
+.aii_logo {
+    width: 200px;
+}
+
+#racialPieChart {
+    width: 50px; 
+}
+
+@media (min-width: 600px) {
+    .card1, .card2 {
+        flex: 1 1 calc(50% - 15px); /* Two in a row */
+    }
+}
+
+@media (min-width: 900px) {
+    .card1, .card2 {
+        flex: 1 1 calc(25% - 15px); /* Four in a row */
+    }
+}
+
+h1 {
+    font-size: clamp(20px, 3vw, 30px);
+}
+
+h3 {
+    font-size: clamp(14px, 2vw, 18px);
+}
+
+p {
+    font-size: clamp(12px, 1.5vw, 16px);
+}
+
+.mobile-header {
+    display: none; /* Hide by default */
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background: white;
+    border-bottom: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+    .mobile-header {
+        display: flex; /* Show only on mobile */
+    }
+}
+
+#distributor-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(120px, 1fr)); /* Two equal columns */
+    gap: 10px;
+    justify-content: center; /* Ensures even spacing */
+    align-items: center;
+    padding: 0; /* Ensures no extra padding affecting alignment */
+}
+
+#distributor-list button {
+    background: #990000;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px;
+    width: 90%;
+}
+
+#distributor-list button:hover {
+    background: #CBCCCC;
+}
+
+
+
+.chart-section {
+    position: relative;
+    width: 48%; /* Default for larger screens */
+    padding: 1rem;
+    background-color: white;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+    margin-bottom: 20px; /* Add spacing at the bottom if needed */
+}
+
+@media (max-width: 1024px) {
+    .chart-section {
+        width: 48%; /* Adjust width slightly for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .chart-section {
+        width: 100%; /* Full width on smaller screens like tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .chart-section {
+        width: 100%; /* Full width on mobile screens */
+        padding: 0.8rem; /* Reduce padding on mobile to save space */
+    }
+}
+
+  #chart-title {
+    font-family: "National 2", sans-serif;
+    font-weight: bold;
+    font-size: 1.25rem; /* or use clamp for responsive sizing */
+    margin-bottom: 0.25rem;
+    color: #000;
+    word-break: break-word;
+  }
+  
+  #chart-subtitle {
+    font-family: "National 2", sans-serif;
+    font-size: 0.9rem;
+    color: #666;
+    max-width: 600px;
+    word-break: break-word;
+  }
+  
+  .indent {
+    margin-left: 15px;
+  }
+
+
+  /* Make a chart-section span the entire row */
+.chart-section-full-width {
+    position: relative;
+    flex: 0 0 100%;
+    max-width: 95%;
+    background-color: white;
+    margin-bottom: 20px;
+    padding: 1rem;
+    margin-left: 15px;
+}
+
+/* Optional: tweak chart height if it looks too short or too tall */
+.chart-section-full-width .chart-container {
+    height: 300px; /* or whatever height fits your layout */
+}
+
+
+
